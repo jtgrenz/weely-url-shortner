@@ -1,0 +1,17 @@
+<table>
+  <thead>
+    <tr>
+      <td>Short Url</td>
+      <td>Redirects to</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @url_maps.each do |url_map| %>
+    <tr>
+      <td><%= short_url(url_map) %></td>
+      <td><%= url_map.url %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
