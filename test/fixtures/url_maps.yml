@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+aaa:
+  url: https://google.com
+  token: aaa
+
+zzzz:
+  url: http://not.secure.ca
+  token: zzzz
+
+abcdefg:
+  url: https://www.amazon.ca/FUJIFILM-X-E4-Mirrorless-XF27mmF2-8-Black/dp/B08TLTBXQZ/ref=sr_1_1?dchild=1&keywords=xe4&qid=1611971377&sr=8-1
+  token: abcdefg
