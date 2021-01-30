@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <td></td>
+      <td>IP Address</td>
+      <td>Created At</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @url_map.redirect_events.count == 0 %>
+    <td col=3> No Events</td>
+    <% else %>
+      <% @url_map.redirect_events.each_with_index do |event, i| %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td class="ip_address"><%= event.ip_address %></td>
+        <td><%= event.created_at %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

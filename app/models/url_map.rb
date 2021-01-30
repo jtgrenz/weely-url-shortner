@@ -1,4 +1,5 @@
 class UrlMap < ApplicationRecord
+  has_many :redirect_events
   validates :url, :token, presence: true
   validates :url, :token, uniqueness: true
   validates :url, url: { no_local: true }

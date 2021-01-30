@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # root to: redirect('/url_maps/new')
   root 'url_maps#new'
 
-  resources :url_maps
+  resources :url_maps, param: :token
 
   get '/:token', to: 'url_maps#short_url_redirect'
 end

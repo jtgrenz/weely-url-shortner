@@ -44,11 +44,35 @@ class UrlMapsIntegrationTest < ActionDispatch::IntegrationTest
     assert_redirected_to url_map.url
   end
 
-  test "/:token gets all redirect events" do
-    skip
+  test "short url redirects record the ip address of the request" do
+    url_map = url_maps(:google_com)
+
+    assert_difference('RedirectEvent.count', 1) do
+      get "/#{url_map.token}"
+    end
+
+    assert_redirected_to url_map.url
+  end
+
+  test "/url_maps/:token gets all redirect events" do
+    url_map = url_maps(:google_com)
+    get url_map_path(url_map.token)
+
+    assert_response :success
+    assert_equal url_map.redirect_events.count, css_select('.ip_address').count
+    url_map.redirect_events.each do |event|
+      assert_select '.ip_address', text: event.ip_address
+    end
   end
 
   test "index lists all url maps" do
-    skip
+    get url_maps_path
+    assert_response :success
+
+    assert_equal UrlMap.all.count, css_select('.token').count
+    UrlMap.all.each do |url_map|
+      assert_select '.token', text: url_map.token
+      assert_select '.url', text: url_map.url
+    end
   end
 end

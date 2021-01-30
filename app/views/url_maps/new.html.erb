@@ -1,18 +1,23 @@
 <%= form_with model: @url_map do |form| %>
-  <% if @url_map.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@url_map.errors.count, "error") %> prohibited this url from being shortened:</h2>
-
-      <ul>
-        <% @url_map.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
   <%= form.label :url, "URL to shorten" %>
   <%= form.text_field :url %>
   <%= form.submit "Shorten!" %>
 <% end %>
 
-<p id="success"><%= notice&.html_safe %></p>
+<% if flash[:short_url] %>
+<p id="success">
+  Your shortened url is:
+  <a id='short-url' data-turbolinks=false href='<%= flash[:short_url] %>'><%= flash[:short_url] %>
+  </a>.
+</p>
+<% end %>
+
+<% if flash[:errors] %>
+<p id="error">
+  <ul>
+   <% flash[:errors].each do |error| %>
+      <li><%= error.to_s %></li>
+    <% end %>
+  </ul>
+</p>
+<% end %>

@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_30_013949) do
+ActiveRecord::Schema.define(version: 2021_01_30_174011) do
+
+  create_table "redirect_events", force: :cascade do |t|
+    t.integer "url_map_id"
+    t.string "ip_address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["url_map_id"], name: "index_redirect_events_on_url_map_id"
+  end
 
   create_table "url_maps", force: :cascade do |t|
     t.string "url"
     t.string "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "redirect_events_id"
+    t.index ["redirect_events_id"], name: "index_url_maps_on_redirect_events_id"
   end
 
+  add_foreign_key "url_maps", "redirect_events", column: "redirect_events_id"
 end
