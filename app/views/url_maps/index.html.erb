@@ -1,6 +1,7 @@
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
+      <td>View Stats</td>
       <td>Short Url Token </td>
       <td>Redirects to</td>
     </tr>
@@ -9,7 +10,8 @@
   <tbody>
     <% @url_maps.each do |url_map| %>
     <tr>
-      <td class="token"><%= link_to(url_map.token, url_map_path(url_map.token)) %></td>
+      <td class="stats"><%= link_to('View stats', url_map_path(url_map.token)) %></td>
+      <td class="token "><%= link_to(url_map.token, short_url(url_map), data: { turbolinks: false }) %></td>
       <td class="url"><%= link_to(url_map.url, url_map.url) %></td>
     </tr>
     <% end %>

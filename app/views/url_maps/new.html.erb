@@ -1,23 +1,38 @@
-<%= form_with model: @url_map do |form| %>
-  <%= form.label :url, "URL to shorten" %>
-  <%= form.text_field :url %>
-  <%= form.submit "Shorten!" %>
-<% end %>
 
-<% if flash[:short_url] %>
-<p id="success">
-  Your shortened url is:
-  <a id='short-url' data-turbolinks=false href='<%= flash[:short_url] %>'><%= flash[:short_url] %>
-  </a>.
-</p>
-<% end %>
+<div class="card text-center">
+  <div class="card-body">
+    <div class="form-wrapper">
+      <%= form_with model: @url_map do |form| %>
 
-<% if flash[:errors] %>
-<p id="error">
-  <ul>
-   <% flash[:errors].each do |error| %>
-      <li><%= error.to_s %></li>
-    <% end %>
-  </ul>
-</p>
-<% end %>
+        <div class="row">
+          <div class="col">
+           <div class="input-group input-group-lg">
+              <%= form.label :url, "URL to shorten", class: "input-group-text" %>
+              <%= form.text_field :url, placeholder: "Paste Url Here", class: "form-control"%>
+              <%= form.submit "Shorten!", class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if flash[:short_url] %>
+        <div class="alert alert-success" role="alert">
+          Your shortened url is:
+          <a id='short-url' data-turbolinks=false href='<%= flash[:short_url] %>'><%= flash[:short_url] %></a>
+        </div>
+      <% end %>
+
+      <% if flash[:errors] %>
+        <div class="alert alert-warning" role="alert">
+          <ul class="list-unstyled">
+          <% flash[:errors].each do |error| %>
+              <li><%= error.to_s %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+</div>
+
